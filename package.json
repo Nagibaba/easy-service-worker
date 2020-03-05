@@ -1,0 +1,30 @@
+{
+  "name": "lazy-service-worker",
+  "version": "1.0.0",
+  "description": "This package is for getting best performance with laziest configuration",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "babel src --out-dir lib"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+    
+  },
+  "keywords": [
+    "lazy",
+    "pwa",
+    "service",
+    "worker"
+  ],
+  "author": "Babek Naghiyev",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "dependencies": {}
+}
