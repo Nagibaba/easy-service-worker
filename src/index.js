@@ -156,7 +156,7 @@ export default function LazySW() {
 
 
 
-	this.init()
+	this.init();
 
 	
 
