@@ -2,7 +2,7 @@ export default function LazySW() {
 	
 
 	this.CACHENAME = 'default-lazy-cache'
-	this.resources = [];
+	this.resources = ['/'];
 	
 
 
