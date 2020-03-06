@@ -1,23 +1,26 @@
-export default function LazySW() {
+const _self = self
+
+function LazySW() {
+	
+	const mainClass = this
+
+	CACHENAME = 'default-lazy-cache'
+	resources = ['/'];
 	
 
-	this.CACHENAME = 'default-lazy-cache'
-	this.resources = ['/'];
-	
 
-
-	this.exclude = (url) => {
-		return null
+	exclude = (url) => {
+		return false
 	}
 
-	this.precache = () => {
-	  return caches.open(this.CACHENAME).then(function (cache) {
+	precache = () => {
+	  return caches.open(CACHENAME).then(function (cache) {
 	    return cache.addAll(resources);
 	  });
 	}
 
-	this.fromCache = (request) => {
-	  return caches.open(this.CACHENAME
+	fromCache = (request) => {
+	  return caches.open(CACHENAME
 	    ).then(function (cache) {
 	    return cache.match(request).then(function (matching) {
 	      return matching ||  fetch(request).catch(error=>{
@@ -28,9 +31,9 @@ export default function LazySW() {
 	  });
 	}
 
-	this.update = (request) => {
-	  
-	  return caches.open(this.CACHENAME).then(function (cache) {
+	update = (request) => {
+	  console.log('updatin', request)
+	  return caches.open(CACHENAME).then(function (cache) {
 
 	    return fetch(request).then(function (response) {
 	      if(response.status<300 && response.type==='basic'){
@@ -51,11 +54,11 @@ export default function LazySW() {
 	      if(text){
 
 	        cache.match(request).then(matching=>matching?matching.text():null).then(function (cachedText) {
-	          if(cachedText && !this.stringsAreSame(text, cachedText)){
+	          if(cachedText && !stringsAreSame(text, cachedText)){
 	            
 	            cache.put(request, response.clone()).then(function () {
 
-	              this.refresh(response, [text.length, cachedText.length])
+	              refresh(response, [text.length, cachedText.length])
 	            });
 	            
 	          } else if(!cachedText) {
@@ -74,7 +77,7 @@ export default function LazySW() {
 	  });
 	}
 
-	this.stringsAreSame = (a, b) => {
+	stringsAreSame = (a, b) => {
 	    
 	    if (a.length !== b.length) {
 	      return false;
@@ -88,8 +91,8 @@ export default function LazySW() {
 	// }
 
 
-	this.refresh = (response, info=null) => {
-	  return self.clients.matchAll().then(function (clients) {
+	refresh = (response, info=null) => {
+	  return _self.clients.matchAll().then(function (clients) {
 	    clients.forEach(function (client) {
 
 	      var message = {
@@ -111,14 +114,15 @@ export default function LazySW() {
 
 
 	this.init = () => {
-		self.addEventListener('install', function(evt) {
+		
+		_self.addEventListener('install', function(evt) {
 		  console.log('The lazy service worker is being installed.');
-		  self.skipWaiting()
-		  if(this.resources) evt.waitUntil(this.precache());
+		  _self.skipWaiting()
+		  if(resources) evt.waitUntil(precache());
 		});
 
 		// delete old caches
-		self.addEventListener('activate', function(event) {
+		_self.addEventListener('activate', function(event) {
 		  event.waitUntil(
 		    caches.keys().then(function(cacheNames) {
 		      return Promise.all(
@@ -126,7 +130,7 @@ export default function LazySW() {
 		          // Return true if you want to remove this cache,
 		          // but remember that caches are shared across
 		          // the whole origin
-		          return cacheName !== this.CACHENAME;
+		          return cacheName !== CACHENAME;
 		        }).map(function(cacheName) {
 		          return caches.delete(cacheName);
 		        })
@@ -135,18 +139,18 @@ export default function LazySW() {
 		  );
 		});
 
-		self.addEventListener('fetch', function(evt) {
-
+		_self.addEventListener('fetch', function(evt) {
 		  const cachableDestinations = ['document', 'font', 'script', 'style', 'image']
 
 		  // !cachableDestinations.includes(evt.request.destination) ||
 		  const nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /[?]/.test(evt.request.url) || /favicon/.test(evt.request.url)
-		  if(this.exclude.bind(null, evt.request.url) || nonCachable){
+
+		  if(exclude(evt.request.url) || nonCachable){
 		    return evt.respondWith(fetch(evt.request).catch(error=>console.log(error)))
 		  }
-		  evt.respondWith(this.fromCache(evt.request));
+		  evt.respondWith(fromCache(evt.request));
 		  
-		  evt.waitUntil(this.update(evt.request)
+		  evt.waitUntil(update(evt.request)
 		    // .then(refresh)
 		  );
 
@@ -161,3 +165,5 @@ export default function LazySW() {
 	
 
 }
+
+export default LazySW;
