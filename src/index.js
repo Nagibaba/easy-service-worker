@@ -166,4 +166,3 @@ function LazySW() {
 
 }
 
-export default LazySW;
