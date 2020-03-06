@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>INDEX</h1>
+
+	<a href="index.html">index</a>
+	<a href="page1.html">p1</a>
+	<a href="page2.html">p2</a>
+
+
+	<script>
+		if ('serviceWorker' in navigator) {
+	        window.addEventListener('load', () => {
+	            navigator.serviceWorker.register("/sw.js?v=2.1.5")
+	            .then((reg) => {
+	              console.log('Service worker registered.', reg);
+	            });
+	        });
+
+
+	        navigator.serviceWorker.onmessage = function (evt) {
+	          const message = JSON.parse(evt.data);
+	          const isRefresh = message.type === 'refresh';
+
+	          if(isRefresh){
+	            location.reload();
+	            // console.log(1)
+	          }
+	        }
+	        
+	    }
+	</script>
+</body>
+</html>
