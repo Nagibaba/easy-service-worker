@@ -139,7 +139,7 @@ function LazySW() {
 
 		_self.addEventListener('fetch', function(evt) {
 		  
-		  const nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /favicon/.test(evt.request.url)
+		  let nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /favicon/.test(evt.request.url)
 		  if(!mainClass.cacheGetRequests){
 		  	nonCachable = nonCachable || /[?]/.test(evt.request.url)
 		  }
