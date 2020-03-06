@@ -6,9 +6,7 @@ function LazySW() {
 
 	this.CACHENAME = 'default-lazy-cache'
 	this.precacheResources = ['/'];
-	
-
-
+	this.cacheGetRequests = false;
 	this.exclude = (url) => {
 		return false
 	}
@@ -143,7 +141,10 @@ function LazySW() {
 		  const cachableDestinations = ['document', 'font', 'script', 'style', 'image']
 
 		  // !cachableDestinations.includes(evt.request.destination) ||
-		  const nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /[?]/.test(evt.request.url) || /favicon/.test(evt.request.url)
+		  const nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /favicon/.test(evt.request.url)
+		  if(!mainClass.cacheGetRequests){
+		  	nonCachable = nonCachable || /[?]/.test(evt.request.url)
+		  }
 
 		  if(mainClass.exclude(evt.request.url) || nonCachable){
 		    return evt.respondWith(fetch(evt.request).catch(error=>console.log(error)))
