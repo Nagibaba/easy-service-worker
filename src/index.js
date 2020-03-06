@@ -5,7 +5,7 @@ function LazySW() {
 	const mainClass = this
 
 	this.CACHENAME = 'default-lazy-cache'
-	this.resources = ['/'];
+	this.precacheResources = ['/'];
 	
 
 
@@ -15,7 +15,7 @@ function LazySW() {
 
 	precache = () => {
 	  return caches.open(mainClass.CACHENAME).then(function (cache) {
-	    return cache.addAll(mainClass.resources);
+	    return cache.addAll(mainClass.precacheResources);
 	  });
 	}
 
