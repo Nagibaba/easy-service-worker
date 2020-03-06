@@ -4,23 +4,23 @@ function LazySW() {
 	
 	const mainClass = this
 
-	CACHENAME = 'default-lazy-cache'
-	resources = ['/'];
+	this.CACHENAME = 'default-lazy-cache'
+	this.resources = ['/'];
 	
 
 
-	exclude = (url) => {
+	this.exclude = (url) => {
 		return false
 	}
 
 	precache = () => {
-	  return caches.open(CACHENAME).then(function (cache) {
-	    return cache.addAll(resources);
+	  return caches.open(mainClass.CACHENAME).then(function (cache) {
+	    return cache.addAll(mainClass.resources);
 	  });
 	}
 
 	fromCache = (request) => {
-	  return caches.open(CACHENAME
+	  return caches.open(mainClass.CACHENAME
 	    ).then(function (cache) {
 	    return cache.match(request).then(function (matching) {
 	      return matching ||  fetch(request).catch(error=>{
@@ -33,7 +33,7 @@ function LazySW() {
 
 	update = (request) => {
 	  console.log('updatin', request)
-	  return caches.open(CACHENAME).then(function (cache) {
+	  return caches.open(mainClass.CACHENAME).then(function (cache) {
 
 	    return fetch(request).then(function (response) {
 	      if(response.status<300 && response.type==='basic'){
@@ -118,7 +118,7 @@ function LazySW() {
 		_self.addEventListener('install', function(evt) {
 		  console.log('The lazy service worker is being installed.');
 		  _self.skipWaiting()
-		  if(resources) evt.waitUntil(precache());
+		  evt.waitUntil(precache());
 		});
 
 		// delete old caches
@@ -130,7 +130,7 @@ function LazySW() {
 		          // Return true if you want to remove this cache,
 		          // but remember that caches are shared across
 		          // the whole origin
-		          return cacheName !== CACHENAME;
+		          return cacheName !== mainClass.CACHENAME;
 		        }).map(function(cacheName) {
 		          return caches.delete(cacheName);
 		        })
@@ -145,7 +145,7 @@ function LazySW() {
 		  // !cachableDestinations.includes(evt.request.destination) ||
 		  const nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /[?]/.test(evt.request.url) || /favicon/.test(evt.request.url)
 
-		  if(exclude(evt.request.url) || nonCachable){
+		  if(mainClass.exclude(evt.request.url) || nonCachable){
 		    return evt.respondWith(fetch(evt.request).catch(error=>console.log(error)))
 		  }
 		  evt.respondWith(fromCache(evt.request));
