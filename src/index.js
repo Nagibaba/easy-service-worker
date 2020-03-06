@@ -7,6 +7,7 @@ function LazySW() {
 	this.CACHENAME = 'default-lazy-cache'
 	this.precacheResources = ['/'];
 	this.cacheGetRequests = false;
+	this.offlinePage = '/offline.html';
 	this.exclude = (url) => {
 		return false
 	}
@@ -22,7 +23,7 @@ function LazySW() {
 	    ).then(function (cache) {
 	    return cache.match(request).then(function (matching) {
 	      return matching ||  fetch(request).catch(error=>{
-	                              return caches.match('/offline.html')
+	                              return caches.match(mainClass.offlinePage)
 	                          
 	                          });
 	    });
@@ -30,7 +31,6 @@ function LazySW() {
 	}
 
 	update = (request) => {
-	  console.log('updatin', request)
 	  return caches.open(mainClass.CACHENAME).then(function (cache) {
 
 	    return fetch(request).then(function (response) {
@@ -138,9 +138,7 @@ function LazySW() {
 		});
 
 		_self.addEventListener('fetch', function(evt) {
-		  const cachableDestinations = ['document', 'font', 'script', 'style', 'image']
-
-		  // !cachableDestinations.includes(evt.request.destination) ||
+		  
 		  const nonCachable = !(evt.request.url.indexOf('http') === 0)  || evt.request.destination!=='document' || evt.request.method=="POST" || evt.request.mode==='cors' || /favicon/.test(evt.request.url)
 		  if(!mainClass.cacheGetRequests){
 		  	nonCachable = nonCachable || /[?]/.test(evt.request.url)
