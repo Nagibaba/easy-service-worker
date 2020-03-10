@@ -1,17 +1,18 @@
 # lazy-service-worker
 
-Laziest cache ever. No need to hard work as ETag or whatever
-#### 1. Only caches urls. Images and other assets should be the concern  of browsers
+Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
+#### 1. Caches only urls. Images and other assets should be the concern  of browsers
 
-#### 2. First returns cached version of url. 
+#### 2. First, returns cached version of url. 
 
 #### 3. After that, makes a fetch request on background to that url.
 
-#### 4. If there is any difference between cached and remote html. Then updates on background and sends a message to client 
+#### 4. If there is any difference between cached and remote html, then updates it on background and sends a message to client 
 
 #### 5. When client gets a message to refresh, it can reload the page or load via js (example: jQuery load function)
 
 
+#### See the example folder for testing it yourself
 
 
 ## Usage
