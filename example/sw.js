@@ -1,4 +1,4 @@
-importScripts('https://nagibaba.github.io/lazy-service-worker/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/lazy-service-worker@v1.0.0/lib/index.js');
 
 const sw = new LazySW();
 
