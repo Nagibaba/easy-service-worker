@@ -12,15 +12,30 @@ function LazySW() {
 		return false
 	}
 
-	precache = () => {
+	const precache = () => {
 	  return caches.open(mainClass.CACHENAME).then(function (cache) {
 	    return cache.addAll(mainClass.precacheResources);
 	  });
 	}
 
-	fromCache = (request) => {
-	  return caches.open(mainClass.CACHENAME
-	    ).then(function (cache) {
+	const refresh = (response, info=null) => {
+	  return _self.clients.matchAll().then(function (clients) {
+	    clients.forEach(function (client) {
+
+	      var message = {
+	        type: 'refresh',
+	        url: response.url,
+	        info
+	        // eTag: response.headers.get('ETag')
+	      };
+	      client.postMessage(JSON.stringify(message));
+	    });
+	  });
+	}
+
+	const fromCache = (request) => {
+	  return caches.open(mainClass.CACHENAME)
+	  .then(function (cache) {
 	    return cache.match(request).then(function (matching) {
 	      return matching ||  fetch(request).catch(error=>{
 	                              return caches.match(mainClass.offlinePage)
@@ -30,7 +45,7 @@ function LazySW() {
 	  });
 	}
 
-	update = (request) => {
+	const update = (request) => {
 	  return caches.open(mainClass.CACHENAME).then(function (cache) {
 
 	    return fetch(request).then(function (response) {
@@ -52,16 +67,15 @@ function LazySW() {
 	      if(text){
 
 	        cache.match(request).then(matching=>matching?matching.text():null).then(function (cachedText) {
-	          if(cachedText && !stringsAreSame(text, cachedText)){
+	          
 	            
 	            cache.put(request, response.clone()).then(function () {
-
-	              refresh(response, [text.length, cachedText.length])
+	            	if(cachedText && !stringsAreSame(text, cachedText)){
+	            		refresh(response, [text.length, cachedText.length])
+	            	}
 	            });
 	            
-	          } else if(!cachedText) {
-	            cache.put(request, response.clone()).then(function () {});
-	          }
+	          
 
 
 	        })
@@ -75,13 +89,16 @@ function LazySW() {
 	  });
 	}
 
-	stringsAreSame = (a, b) => {
+	const stringsAreSame = (a, b) => {
 	    
-	    if (a.length !== b.length) {
+	    const cleanedA = a.replace(/<!--LazySWSkip-->[\s\S]*<!--\/LazySWSkip-->/, '')
+	    const cleanedB = b.replace(/<!--LazySWSkip-->[\s\S]*<!--\/LazySWSkip-->/, '')
+
+	    if (cleanedA.length !== cleanedB.length) {
 	      return false;
 	    }
 	    
-	    return a.localeCompare(b) === 0;
+	    return cleanedA.localeCompare(cleanedB) === 0;
 	}
 
 	// function lengthsAreSame(a, b){
@@ -89,20 +106,7 @@ function LazySW() {
 	// }
 
 
-	refresh = (response, info=null) => {
-	  return _self.clients.matchAll().then(function (clients) {
-	    clients.forEach(function (client) {
-
-	      var message = {
-	        type: 'refresh',
-	        url: response.url,
-	        info
-	        // eTag: response.headers.get('ETag')
-	      };
-	      client.postMessage(JSON.stringify(message));
-	    });
-	  });
-	}
+	
 
 
 		
@@ -164,4 +168,3 @@ function LazySW() {
 	
 
 }
-
