@@ -1,6 +1,9 @@
 # lazy-service-worker
 
 Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
+| WARNING: Any regenerated strings may end up with forever reloading. If so, avoid reloading! |
+| --- |
+
 #### 1. Caches only urls. Images and other assets should be the concern  of browsers
 
 #### 2. First, returns cached version of url. 
