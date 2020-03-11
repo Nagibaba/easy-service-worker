@@ -1,7 +1,7 @@
 # lazy-service-worker
 
 Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
-| WARNING: Any regenerated strings may end up with forever reloading. If so, avoid reloading! |
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function! |
 | --- |
 
 #### 1. Caches only urls. Images and other assets should be the concern  of browsers
