@@ -1,5 +1,7 @@
 # lazy-service-worker
 
+## Why? because we :heart: lazy devs
+
 Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 | WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--LazySWSkip-->  <!--/LazySWSkip-->`|
 | --- |
