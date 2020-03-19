@@ -11,9 +11,9 @@
 	<a href="page2.html">p2</a>
 
 
-	<!--LazySWSkip-->
+	<!--LazySWIgnore-->
 		this regenerated text will be ignored
-	<!--/LazySWSkip-->
+	<!--/LazySWIgnore-->
 
 	<script>
 		if ('serviceWorker' in navigator) {
@@ -28,9 +28,14 @@
 	        navigator.serviceWorker.onmessage = function (evt) {
 	          const message = JSON.parse(evt.data);
 	          const isRefresh = message.type === 'refresh';
+	          const isUncachableResponse = message.type === 'uncachable-response';
 
 	          if(isRefresh){
 	            location.reload();
+	          }
+
+	          if(isUncachableResponse){
+	          	// response code is 300 or more
 	          }
 	        }
 	        

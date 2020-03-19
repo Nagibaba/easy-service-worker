@@ -1,7 +1,7 @@
 # lazy-service-worker
 
 Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
-| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function! Wrap any regenerated text inside  `<!--LazySWSkip-->  <!--/LazySWSkip-->`|
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function! Wrap any regenerated text inside  `<!--LazySWIgnore-->  <!--/LazySWIgnore-->`|
 | --- |
 
 #### 1. Caches only urls. Images and other assets should be the concern  of browsers
@@ -23,7 +23,7 @@ Laziest caching ever. No need to hard work as ETag or whatever. As easy as drink
 ### Service worker file
 
 ```
-importScripts('https://cdn.jsdelivr.net/gh/nagibaba/lazy-service-worker@v1.0.0/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/lazy-service-worker@1.1.3/lib/index.js');
 
 const sw = new LazySW();
 
@@ -66,14 +66,18 @@ sw.exclude = (url) => {
 
 
         navigator.serviceWorker.onmessage = function (evt) {
-          const message = JSON.parse(evt.data);
-          const isRefresh = message.type === 'refresh';
+            const message = JSON.parse(evt.data);
+            const isRefresh = message.type === 'refresh';
+            const isUncachableResponse = message.type === 'uncachable-response';
 
-          if(isRefresh){
-            location.reload();
-            // or jQuery load function
-           }
-        }
+            if(isRefresh){
+              location.reload();
+            }
+
+            if(isUncachableResponse){
+              // response code is 300 or more
+            }
+          }
         
     }
 </script>
@@ -84,6 +88,17 @@ sw.exclude = (url) => {
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+
+```
+
+npm run prepublish
+
+```
+
+## Version 1.1.3
+
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

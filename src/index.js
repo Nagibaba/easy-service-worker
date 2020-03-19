@@ -33,6 +33,21 @@ function LazySW() {
 	  });
 	}
 
+	const serverReturnedUncachableResponse = (response, info=null) => {
+	  return _self.clients.matchAll().then(function (clients) {
+	    clients.forEach(function (client) {
+
+	      var message = {
+	        type: 'uncachable-response',
+	        response: response,
+	        info
+	        // eTag: response.headers.get('ETag')
+	      };
+	      client.postMessage(JSON.stringify(message));
+	    });
+	  });
+	}
+
 	const fromCache = (request) => {
 	  return caches.open(mainClass.CACHENAME)
 	  .then(function (cache) {
@@ -49,11 +64,12 @@ function LazySW() {
 	  return caches.open(mainClass.CACHENAME).then(function (cache) {
 
 	    return fetch(request).then(function (response) {
+
 	      if(response.status<300 && response.type==='basic'){
-	  
 	        return Promise.all([response.clone(), response.text()]);
 	      }
 
+	      serverReturnedUncachableResponse(response)
 	      return [false, null];
 
 
@@ -91,8 +107,8 @@ function LazySW() {
 
 	const stringsAreSame = (a, b) => {
 	    
-	    const cleanedA = a.replace(/<!--LazySWSkip-->[\s\S]*<!--\/LazySWSkip-->/, '')
-	    const cleanedB = b.replace(/<!--LazySWSkip-->[\s\S]*<!--\/LazySWSkip-->/, '')
+	    const cleanedA = a.replace(/<!--LazySWIgnore-->[\s\S]*<!--\/LazySWIgnore-->/, '')
+	    const cleanedB = b.replace(/<!--LazySWIgnore-->[\s\S]*<!--\/LazySWIgnore-->/, '')
 
 	    if (cleanedA.length !== cleanedB.length) {
 	      return false;
@@ -148,7 +164,7 @@ function LazySW() {
 		  	nonCachable = nonCachable || /[?]/.test(evt.request.url)
 		  }
 
-		  if(mainClass.exclude(evt.request.url) || nonCachable){
+		  if(nonCachable || mainClass.exclude(evt.request.url)){
 		    return evt.respondWith(fetch(evt.request).catch(error=>console.log(error)))
 		  }
 		  evt.respondWith(fromCache(evt.request));

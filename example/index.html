@@ -5,15 +5,15 @@
 	<title>Document</title>
 </head>
 <body>
-	<h1>INDEX.</h1>
+	<h1>INDEX</h1>
 
 	<a href="index.html">index</a>
 	<a href="page1.html">p1</a>
 	<a href="page2.html">p2</a>
 
-	<!--LazySWSkip-->
-		this regenerated text will be ignored././
-	<!--/LazySWSkip-->
+	<!--LazySWIgnore-->
+		this regenerated text will be ignored...
+	<!--/LazySWIgnore-->
 
 	<script>
 		if ('serviceWorker' in navigator) {
@@ -28,10 +28,14 @@
 	        navigator.serviceWorker.onmessage = function (evt) {
 	          const message = JSON.parse(evt.data);
 	          const isRefresh = message.type === 'refresh';
+	          const isUncachableResponse = message.type === 'uncachable-response';
 
 	          if(isRefresh){
 	            location.reload();
-	            // console.log(1)
+	          }
+
+	          if(isUncachableResponse){
+	          	// response code is 300 or more
 	          }
 	        }
 	        
