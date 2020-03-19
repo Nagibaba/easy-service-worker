@@ -1,8 +1,11 @@
 # lazy-service-worker
 
+## Why? because we :heart: lazy devs
+
 Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
-| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function! Wrap any regenerated text inside  `<!--LazySWIgnore-->  <!--/LazySWIgnore-->`|
-| --- |
+
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--LazySWIgnore-->  <!--/LazySWIgnore-->`|
+
 
 #### 1. Caches only urls. Images and other assets should be the concern  of browsers
 
@@ -23,6 +26,7 @@ Laziest caching ever. No need to hard work as ETag or whatever. As easy as drink
 ### Service worker file
 
 ```
+
 importScripts('https://cdn.jsdelivr.net/gh/nagibaba/lazy-service-worker@1.1.3/lib/index.js');
 
 const sw = new LazySW();
