@@ -12,7 +12,7 @@ No need to hard work as ETag or whatever. As easy as drinking a coffee, even eas
 
 #### 4. If our algorithm finds any difference between the cached and the remote html, then updates the cache on background and sends a message to the client
 
-#### 5. When the client gets the message to refresh, can reload the page or load it via js (example: jQuery load function)
+#### 5. When the client gets the message to refresh, it can reload the page or load it via js (example: jQuery load function)
 
 #### See the example folder for testing it yourself
 
