@@ -1,6 +1,6 @@
 # Easy service worker
 
-## Why? because we :heart: lazy devs
+## Easiest ever
 
 Easiest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 
