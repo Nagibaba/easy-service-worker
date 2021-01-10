@@ -2,7 +2,7 @@
 
 ## Why? because we :heart: lazy devs
 
-Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
+Easiest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 
 
 
@@ -26,11 +26,11 @@ Laziest caching ever. No need to hard work as ETag or whatever. As easy as drink
 
 ```
 
-importScripts('https://cdn.jsdelivr.net/gh/nagibaba/lazy-service-worker@1.1.3/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.1.4/lib/index.js');
 
-const sw = new LazySW();
+const sw = new EasySW();
 
-sw.CACHENAME = 'default-lazy-cache-v1'
+sw.CACHENAME = 'default-easy-cache-v1'
 
 // resources to be precached
 // @default ['/']
@@ -87,7 +87,7 @@ sw.exclude = (url) => {
 
 ```
 
-| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--LazySWIgnore-->  <!--/LazySWIgnore-->`|
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--EasySWIgnore-->  <!--/EasySWIgnore-->`|
 
 
 ## Contributing
