@@ -4,21 +4,17 @@
 
 Easiest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 
+#### 1. Caches only html. Images and other assets should be the concern of browsers
 
-
-#### 1. Caches only html. Images and other assets should be the concern  of browsers
-
-#### 2. First, returns cached version of url. 
+#### 2. First, returns cached version of url.
 
 #### 3. After that, makes a fetch request on background to that url.
 
-#### 4. If there is any difference between cached and remote html, then updates it on background and sends a message to client 
+#### 4. If there is any difference between cached and remote html, then updates it on background and sends a message to client
 
 #### 5. When client gets a message to refresh, it can reload the page or load via js (example: jQuery load function)
 
-
 #### See the example folder for testing it yourself
-
 
 ## Usage
 
@@ -26,7 +22,7 @@ Easiest caching ever. No need to hard work as ETag or whatever. As easy as drink
 
 ```
 
-importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.1.4/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.0/lib/index.js');
 
 const sw = new EasySW();
 
@@ -56,7 +52,6 @@ sw.exclude = (url) => {
 
 ### Html part (Client)
 
-
 ```
 <script>
   if ('serviceWorker' in navigator) {
@@ -81,20 +76,19 @@ sw.exclude = (url) => {
               // response code is 300 or more
             }
           }
-        
+
     }
 </script>
 
 ```
 
-| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--EasySWIgnore-->  <!--/EasySWIgnore-->`|
-
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside `<!--EasySWIgnore--> <!--/EasySWIgnore-->`|
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
-
 
 ```
 
@@ -102,9 +96,8 @@ npm run prepublish
 
 ```
 
-## Version 1.1.4
-
-
+## Version 1.2.0
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

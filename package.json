@@ -1,24 +1,24 @@
 {
-  "name": "easy-service-worker",
-  "version": "1.1.4",
-  "description": "This package is for getting best performance with eaziest configuration",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "uglifyjs src/index.js --output lib/index.js",
-    "serve": "serve example"
-  },
-  "keywords": [
-    "easy",
-    "pwa",
-    "service",
-    "worker"
-  ],
-  "author": "Babek Naghiyev",
-  "license": "ISC",
-  "devDependencies": {
-    "uglify-es": "^3.3.9",
-    "serve": "^11.3.2"
-  },
-  "dependencies": {}
+	"name": "easy-service-worker",
+	"version": "1.2.0",
+	"description": "This package is for getting best performance with eaziest configuration",
+	"main": "lib/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepublish": "uglifyjs src/index.js --output lib/index.js",
+		"serve": "serve example"
+	},
+	"keywords": [
+		"easy",
+		"pwa",
+		"service",
+		"worker"
+	],
+	"author": "Babek Naghiyev",
+	"license": "ISC",
+	"devDependencies": {
+		"uglify-es": "^3.3.9",
+		"serve": "^11.3.2"
+	},
+	"dependencies": {}
 }
