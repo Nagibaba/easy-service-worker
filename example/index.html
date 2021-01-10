@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	<h1>INDEX</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
 
-	<a href="index.html">index</a>
-	<a href="page1.html">p1</a>
-	<a href="page2.html">p2</a>
+	<body>
+		<h1>INDEX</h1>
+		<h2>Run `npm run serve` to see the example</h2>
 
-	<!--EasySWIgnore-->
+		<a href="index.html">index</a>
+		<a href="page1.html">p1</a>
+		<a href="page2.html">p2</a>
+
+		<!--EasySWIgnore-->
 		this regenerated text will be ignored...
-	<!--/EasySWIgnore-->
+		<!--/EasySWIgnore-->
 
-	<script>
-		if ('serviceWorker' in navigator) {
-	        window.addEventListener('load', () => {
-	            navigator.serviceWorker.register("/sw.js?v=2.1.5")
-	            .then((reg) => {
-	              console.log('Service worker registered.', reg);
-	            });
-	        });
+		<script>
+			if ("serviceWorker" in navigator) {
+				window.addEventListener("load", () => {
+					navigator.serviceWorker
+						.register("/sw.js?v=2.1.5")
+						.then((reg) => {
+							console.log("Service worker registered.", reg);
+						});
+				});
 
+				navigator.serviceWorker.onmessage = function (evt) {
+					const message = JSON.parse(evt.data);
+					const isRefresh = message.type === "refresh";
+					const isUncachableResponse =
+						message.type === "uncachable-response";
 
-	        navigator.serviceWorker.onmessage = function (evt) {
-	          const message = JSON.parse(evt.data);
-	          const isRefresh = message.type === 'refresh';
-	          const isUncachableResponse = message.type === 'uncachable-response';
+					if (isRefresh) {
+						location.reload();
+					}
 
-	          if(isRefresh){
-	            location.reload();
-	          }
-
-	          if(isUncachableResponse){
-	          	// response code is 300 or more
-	          }
-	        }
-	        
-	    }
-	</script>
-</body>
+					if (isUncachableResponse) {
+						// response code is 300 or more
+					}
+				};
+			}
+		</script>
+	</body>
 </html>
