@@ -84,16 +84,18 @@ sw.exclude = (url) => {
 
 | WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside `<!--EasySWIgnore--> <!--/EasySWIgnore-->`|
 
+## Example
+
+```
+npm run serve
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
-
 ```
-
 npm run prepublish
-
 ```
 
 ## Version 1.2.2
