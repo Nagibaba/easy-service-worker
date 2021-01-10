@@ -1,13 +1,12 @@
-# lazy-service-worker
+# Easy service worker
 
 ## Why? because we :heart: lazy devs
 
 Laziest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 
-| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--LazySWIgnore-->  <!--/LazySWIgnore-->`|
 
 
-#### 1. Caches only urls. Images and other assets should be the concern  of browsers
+#### 1. Caches only html. Images and other assets should be the concern  of browsers
 
 #### 2. First, returns cached version of url. 
 
@@ -88,6 +87,9 @@ sw.exclude = (url) => {
 
 ```
 
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside  `<!--LazySWIgnore-->  <!--/LazySWIgnore-->`|
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
@@ -100,7 +102,7 @@ npm run prepublish
 
 ```
 
-## Version 1.1.3
+## Version 1.1.4
 
 
 
