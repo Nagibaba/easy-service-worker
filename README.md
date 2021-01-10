@@ -1,8 +1,8 @@
 # Easy service worker
 
-## Easiest ever
+## Easiest caching ever
 
-Easiest caching ever. No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
+No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 
 #### 1. Caches only html. Images and other assets should be the concern of browsers
 
