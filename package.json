@@ -1,6 +1,6 @@
 {
 	"name": "easy-service-worker",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "This package is for getting best performance with eaziest configuration",
 	"main": "lib/index.js",
 	"scripts": {

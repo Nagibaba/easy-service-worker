@@ -1,5 +1,5 @@
 importScripts(
-	"https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.2/lib/index.js",
+	"https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.3/lib/index.js",
 );
 
 const sw = new EasySW();
@@ -15,8 +15,8 @@ sw.precacheResources = ["/"];
 sw.cacheGetRequests = false;
 
 // offline if not cached
-// @default '/offline.html'
-sw.offlinePage = "/offline.html";
+// @default '/offline'
+sw.offlinePage = "/offline";
 
 // Returns true if you don't want the URL to be cached
 // @return boolean

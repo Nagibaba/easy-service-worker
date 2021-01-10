@@ -6,7 +6,7 @@ function EasySW() {
 	this.CACHENAME = "default-easy-cache";
 	this.precacheResources = ["/"];
 	this.cacheGetRequests = false;
-	this.offlinePage = "/offline.html";
+	this.offlinePage = "/offline";
 	this.exclude = (url) => {
 		return false;
 	};

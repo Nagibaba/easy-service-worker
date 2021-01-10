@@ -22,7 +22,7 @@ No need to hard work as ETag or whatever. As easy as drinking a coffee, even eas
 
 ```
 
-importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.2/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.3/lib/index.js');
 
 const sw = new EasySW();
 
@@ -37,8 +37,8 @@ sw.precacheResources = ['/'];
 sw.cacheGetRequests = false;
 
 // offline if not cached
-// @default '/offline.html'
-sw.offlinePage = '/offline.html';
+// @default '/offline'
+sw.offlinePage = '/offline';
 
 
 // Returns true if you don't want the URL to be cached
@@ -98,7 +98,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 npm run prepublish
 ```
 
-## Version 1.2.2
+## Version 1.2.3
 
 ## License
 
