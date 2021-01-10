@@ -1,8 +1,8 @@
 importScripts(
-	"https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.0/lib/index.js",
+	"https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.1/lib/index.js",
 );
 
-const sw = new EazySW();
+const sw = new EasySW();
 
 sw.CACHENAME = "default-easy-cache-v1";
 

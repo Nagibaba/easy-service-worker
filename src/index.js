@@ -13,7 +13,10 @@ function EasySW() {
 
 	const precache = () => {
 		return caches.open(mainClass.CACHENAME).then(function (cache) {
-			return cache.addAll(mainClass.precacheResources);
+			return cache.addAll([
+				...mainClass.precacheResources,
+				mainClass.offlinePage,
+			]);
 		});
 	};
 
