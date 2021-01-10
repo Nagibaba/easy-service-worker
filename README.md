@@ -22,7 +22,7 @@ Easiest caching ever. No need to hard work as ETag or whatever. As easy as drink
 
 ```
 
-importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.1/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.2.2/lib/index.js');
 
 const sw = new EasySW();
 
@@ -96,7 +96,7 @@ npm run prepublish
 
 ```
 
-## Version 1.2.1
+## Version 1.2.2
 
 ## License
 
