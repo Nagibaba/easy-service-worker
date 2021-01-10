@@ -1,8 +1,8 @@
-importScripts('https://cdn.jsdelivr.net/gh/nagibaba/lazy-service-worker@1.1.3/lib/index.js');
+importScripts('https://cdn.jsdelivr.net/gh/nagibaba/easy-service-worker@1.1.4/lib/index.js');
 
-const sw = new LazySW();
+const sw = new EazySW();
 
-sw.CACHENAME = 'default-lazy-cache-v1'
+sw.CACHENAME = 'default-easy-cache-v1'
 
 // resources to be precached
 // @default ['/']
