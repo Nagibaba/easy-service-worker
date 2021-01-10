@@ -1,10 +1,10 @@
 const _self = self
 
-function LazySW() {
+function EasySW() {
 	
 	const mainClass = this
 
-	this.CACHENAME = 'default-lazy-cache'
+	this.CACHENAME = 'default-easy-cache'
 	this.precacheResources = ['/'];
 	this.cacheGetRequests = false;
 	this.offlinePage = '/offline.html';
@@ -107,8 +107,8 @@ function LazySW() {
 
 	const stringsAreSame = (a, b) => {
 	    
-	    const cleanedA = a.replace(/<!--LazySWIgnore-->[\s\S]*<!--\/LazySWIgnore-->/, '')
-	    const cleanedB = b.replace(/<!--LazySWIgnore-->[\s\S]*<!--\/LazySWIgnore-->/, '')
+	    const cleanedA = a.replace(/<!--EasySWIgnore-->[\s\S]*<!--\/EasySWIgnore-->/, '')
+	    const cleanedB = b.replace(/<!--EasySWIgnore-->[\s\S]*<!--\/EasySWIgnore-->/, '')
 
 	    if (cleanedA.length !== cleanedB.length) {
 	      return false;
@@ -117,24 +117,11 @@ function LazySW() {
 	    return cleanedA.localeCompare(cleanedB) === 0;
 	}
 
-	// function lengthsAreSame(a, b){
-	//   return a.length === b.length
-	// }
-
-
-	
-
-
-		
-
-
-	
-
 
 	this.init = () => {
 		
 		_self.addEventListener('install', function(evt) {
-		  console.log('The lazy service worker is being installed.');
+		  console.log('The Easy service worker is being installed.');
 		  _self.skipWaiting()
 		  evt.waitUntil(precache());
 		});
