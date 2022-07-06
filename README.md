@@ -82,7 +82,7 @@ sw.exclude = (url) => {
 
 ```
 
-| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid reload function or wrap any regenerated texts inside `<!--EasySWIgnore--> <!--/EasySWIgnore-->`|
+| WARNING: Any regenerated strings like csrf tokens may end up with forever reloading. If so, avoid any reload function call or wrap regenerated texts inside `<!--EasySWIgnore--> <!--/EasySWIgnore-->`|
 
 ## Example
 #### See the example folder for testing it yourself
