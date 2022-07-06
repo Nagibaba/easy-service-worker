@@ -4,13 +4,13 @@
 
 No need to hard work as ETag or whatever. As easy as drinking a coffee, even easier.
 
-1. Caches only html. Images and other assets should be the concern of browsers
+1. Caches only html. Images and other assets are the concern of browsers
 
-2. First, returns the cached version of the url.
+2. Initially, returns the cached version of the url.
 
-3. After that, makes a fetch request on background to that very same url.
+3. After that, makes a fetch request on background to that url.
 
-4. If our algorithm finds any difference between the cached and the remote html, then updates the cache on background and sends a message to the client
+4. If our algorithm finds any difference between the cached and the remote html, then it updates the cache on background and sends a message to the client
 
 5. When the client gets the message to refresh, it can reload the page or load it via js (example: jQuery load function)
 
